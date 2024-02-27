@@ -1,7 +1,15 @@
+require("dotenv").config();
 const express = require("express");
-
+const { default: mongoose } = require('mongoose');
+const auth = require("./routes/auth.js")
 const app = express();
 
+mongoose
+        .connect(process.env.MONGODB_URI)    
+        .then(() => console.log("db connected")).
+        catch((err) => console.log("db not connected",err));
+
+app.use("/api/v1/auth", auth);
 const HOST = process.env.HOST || "localhost";
 const PORT = process.env.PORT || 3000;
 
