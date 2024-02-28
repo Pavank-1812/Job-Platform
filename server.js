@@ -3,7 +3,7 @@ const express = require("express");
 const { default: mongoose } = require('mongoose');
 const auth = require("./routes/auth.js")
 const app = express();
-
+app.use(express.json());
 mongoose
         .connect(process.env.MONGODB_URI)    
         .then(() => console.log("db connected")).
